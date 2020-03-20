@@ -1,4 +1,6 @@
-package com.edu.ifsc.library;
+package com.edu.ifsc.library.entities;
+
+import com.edu.ifsc.library.InterfaceCalculoDevolucao;
 
 public class Devolucao {
 	private Pessoa cliente;

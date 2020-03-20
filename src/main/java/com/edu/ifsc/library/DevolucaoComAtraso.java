@@ -1,5 +1,7 @@
 package com.edu.ifsc.library;
 
+import com.edu.ifsc.library.entities.Emprestimo;
+
 public class DevolucaoComAtraso implements InterfaceCalculoDevolucao {
 	private Emprestimo emprestimo;
 

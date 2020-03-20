@@ -1,4 +1,5 @@
-package com.edu.ifsc.library;
+package com.edu.ifsc.library.entities;
+
 
 public class Emprestimo {
 	private Pessoa cliente;
@@ -48,7 +49,7 @@ public class Emprestimo {
 
 	@Override
 	public String toString() {
-		return "Emprestimo de: " + cliente + ", livro: " + livro.getNomeLivro() + ", quantidade de dias: " + diasEmprestimo;
+		return "\nEmprestimo de: " + cliente + ", livro: " + livro.getNomeLivro() + ", quantidade de dias: " + diasEmprestimo;
 	}	
 	
 	
