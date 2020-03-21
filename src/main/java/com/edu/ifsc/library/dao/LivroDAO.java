@@ -17,7 +17,7 @@ public class LivroDAO {
 
 	public static AbstractLivro getLivro(String nome) {
 		for (Livro livros : livrosBiblioteca) {
-			if (nome.equals(livros.getNomeLivro()))
+			if (nome.equalsIgnoreCase(livros.getNomeLivro()))
 				return new Livro(livros.getNomeLivro(), livros.getAutorLivro(), livros.getAnoLivro(),
 						livros.getQuantidade());
 		}

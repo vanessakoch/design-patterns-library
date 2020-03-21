@@ -16,7 +16,7 @@ public class FuncionarioDAO {
 
 	public static AbstractPessoa getFuncionario(String nome) {
 		for (Funcionario funcionario : funcionariosList) {
-			if (nome.equals(funcionario.getNome()))
+			if (nome.equalsIgnoreCase(funcionario.getNome()))
 				return new Funcionario(funcionario.getNome(), funcionario.getCodigo(), funcionario.getSetor(),
 						funcionario.getFuncao());
 		}

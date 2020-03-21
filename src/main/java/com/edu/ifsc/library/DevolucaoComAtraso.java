@@ -11,9 +11,9 @@ public class DevolucaoComAtraso implements InterfaceCalculoDevolucao {
 	}
 
 	public double calcular(Emprestimo emprestimo, int diasPosse) {
-		double valorMulta = emprestimo.getDiasEmprestimo() + diasPosse;
+		double valorMulta = (emprestimo.getDiasEmprestimo() + diasPosse) * 0.30;
 
-		return valorMulta * 0.30;
+		return valorMulta ;
 	}
 
 	public Emprestimo getEmprestimo() {

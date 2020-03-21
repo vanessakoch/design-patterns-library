@@ -1,12 +1,8 @@
 package com.edu.ifsc.library.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Funcionario extends Pessoa {
 	private String setor;
 	private String funcao;
-	private List<Emprestimo> emprestimosRealizados = new ArrayList<Emprestimo>();
 
 	public Funcionario(String nome, int codigo, String setor, String funcao) {
 		super(nome, codigo);
@@ -14,20 +10,16 @@ public class Funcionario extends Pessoa {
 		this.funcao = funcao;
 	}
 
-	public Emprestimo getEmprestimo(String nomeLivro) {
-		for (Emprestimo livro : emprestimosRealizados) {
-			if (livro.getLivro().getNomeLivro().contentEquals(nomeLivro)) {
-				return livro;
-			}
-		}
-		return null;
-	}
-	
 	@Override
-	public List<Emprestimo> getEmprestimosRealizados() {
-		return emprestimosRealizados;
+	protected double valorXeroxPorFolha() {
+		return this.getQuantidadeFolha() * 0.01;
 	}
 
+	@Override
+	protected double valorImpressaoPorFolha() {
+		return this.getQuantidadeFolha() * 0.03;
+	}
+	
 	public String getSetor() {
 		return setor;
 	}

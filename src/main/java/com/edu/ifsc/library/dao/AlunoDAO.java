@@ -16,7 +16,7 @@ public class AlunoDAO {
 
 	public static AbstractPessoa getAluno(String nome) {
 		for (Aluno aluno : alunosList) {
-			if (nome.equals(aluno.getNome()))
+			if (nome.equalsIgnoreCase(aluno.getNome()))
 				return new Aluno(aluno.getNome(), aluno.getCodigo(), aluno.getCurso());
 		}
 		return new PessoaNull();
