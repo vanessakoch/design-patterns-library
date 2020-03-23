@@ -42,8 +42,7 @@ public class Livro extends AbstractLivro {
 
 	@Override
 	public String toString() {
-		return "Livro " + nomeLivro + ", autor: " + autor + ", ano: " + ano + ", quantidade: " + quantidade
-				+ ".";
+		return "Livro " + nomeLivro + ", autor: " + autor + ", ano: " + ano + ", quantidade: " + quantidade;
 	}
 
 }

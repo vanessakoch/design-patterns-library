@@ -3,11 +3,11 @@ package com.edu.ifsc.library.entities;
 
 public class Emprestimo {
 	private Pessoa cliente;
-	private Funcionario funcionario;
+	private Bibliotecario funcionario;
 	private Livro livro;
 	private int diasEmprestimo;
 
-	public Emprestimo(Pessoa cliente, Funcionario funcionario, Livro livro, int diasEmprestimo) {
+	public Emprestimo(Pessoa cliente, Bibliotecario funcionario, Livro livro, int diasEmprestimo) {
 		super();
 		this.cliente = cliente;
 		this.funcionario = funcionario;
@@ -39,17 +39,18 @@ public class Emprestimo {
 		this.diasEmprestimo = diasEmprestimo;
 	}
 
-	public Funcionario getFuncionario() {
+	public Bibliotecario getFuncionario() {
 		return funcionario;
 	}
 
-	public void setFuncionario(Funcionario funcionario) {
+	public void setFuncionario(Bibliotecario funcionario) {
 		this.funcionario = funcionario;
 	}
 
 	@Override
 	public String toString() {
-		return "\nEmprestimo de: " + cliente + ", livro: " + livro.getNomeLivro() + ", quantidade de dias: " + diasEmprestimo;
+		return "\nEmprestimo de: " + cliente.getNome() + ", livro: " + livro.getNomeLivro() + ", quantidade de dias: " 
+				 + diasEmprestimo + "\n";
 	}	
 	
 	
