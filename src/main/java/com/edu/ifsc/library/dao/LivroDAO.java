@@ -11,15 +11,17 @@ public class LivroDAO {
 	public static List<Livro> livrosBiblioteca = new ArrayList<Livro>();
 
 	public void addLivros() {
-		livrosBiblioteca.add(new Livro("Doctor Sleep", "Stephen King", 2013, 10));
-		livrosBiblioteca.add(new Livro("The Shinning", "Stephen King", 1977, 5));
+		livrosBiblioteca.add(new Livro("Java", 3, "Stephen King", 2013));
+		livrosBiblioteca.add(new Livro("C++", 1,"Stephen King", 1977));
+		livrosBiblioteca.add(new Livro("Python", 1,"Stephen King", 1990));
+		livrosBiblioteca.add(new Livro("Ruby", 1,"Stephen King", 1975));
+		livrosBiblioteca.add(new Livro("JavaScript", 1,"Stephen King", 2011));
 	}
 
 	public static AbstractLivro getLivro(String nome) {
 		for (Livro livros : livrosBiblioteca) {
 			if (nome.equalsIgnoreCase(livros.getNomeLivro()))
-				return new Livro(livros.getNomeLivro(), livros.getAutorLivro(), livros.getAnoLivro(),
-						livros.getQuantidade());
+				return new Livro(livros.getNomeLivro(), livros.getEdicao(), livros.getAutorLivro(), livros.getAnoLivro());
 		}
 		return new LivroNull();
 

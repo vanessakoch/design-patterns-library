@@ -1,8 +1,9 @@
 package com.edu.ifsc.library.entities;
 
 import com.edu.ifsc.library.InterfaceCalculoDevolucao;
+import com.edu.ifsc.library.LivroState;
 
-public class Devolucao {
+public class Devolucao implements LivroState {
 	private Pessoa cliente;
 	private Emprestimo emprestimo;
 	private int diasPosse;
@@ -13,6 +14,9 @@ public class Devolucao {
 		this.cliente = cliente;
 		this.emprestimo = emprestimo;
 		this.diasPosse = diasPosse;
+	}
+
+	public Devolucao() {
 	}
 
 	public double executeStrategy(InterfaceCalculoDevolucao calcularEmprestimo) {
@@ -49,6 +53,14 @@ public class Devolucao {
 
 	public void setCalcularEmprestimo(InterfaceCalculoDevolucao calcularEmprestimo) {
 		this.calcularEmprestimo = calcularEmprestimo;
+	}
+
+	public void onAction(Livro livro) {
+		livro.setState(this);
+	}
+
+	public String imprimirState() {
+		return "Livro foi devolvido";
 	}
 
 }

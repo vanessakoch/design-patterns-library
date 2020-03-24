@@ -4,6 +4,8 @@ import com.edu.ifsc.library.entities.Bibliotecario;
 import com.edu.ifsc.library.entities.Devolucao;
 import com.edu.ifsc.library.entities.Emprestimo;
 import com.edu.ifsc.library.entities.Pessoa;
+import com.edu.ifsc.library.entities.Recepcionista;
+import com.edu.ifsc.library.entities.Servico;
 
 public class DevolveEmprestimos implements Servico {
 
@@ -16,21 +18,48 @@ public class DevolveEmprestimos implements Servico {
 		System.out.println("Este funcionario faz devolucao, não cadastro!");
 	}
 
-	public void devolverEmprestimo(Pessoa pessoa, Emprestimo emprestimo, int diasDePosse) {
-		Devolucao devolver = new Devolucao(pessoa, emprestimo, diasDePosse);
-		if (devolver.getDiasPosse() > emprestimo.getDiasEmprestimo()) {
-			DevolucaoComAtraso atraso = new DevolucaoComAtraso(emprestimo);
-			System.out.println(
-					"O valor da devolução com multa ficou em: R$ " + devolver.executeStrategy(atraso) + " reais.");
-		} else {
-			DevolucaoSemAtraso semAtraso = new DevolucaoSemAtraso(emprestimo);
-			System.out.println(
-					"A devolução não teve multa, parabéns: R$ " + devolver.executeStrategy(semAtraso) + " reais.");
-		}
-		emprestimo.getLivro().setQuantidade(emprestimo.getLivro().getQuantidade() + 1);
-		pessoa.getEmprestimosRealizados().remove(emprestimo);
-		System.out.println("Devolução feita com sucesso!");
+	public void devolverEmprestimo(Pessoa pessoa, Recepcionista funcionario, String livroNome, int diasDePosse) {
+		AtividadeBiblioteca servico = new AtividadeBiblioteca("Recepção");
 
+		Dispositivo monitor = new Dispositivo("Monitor");
+		Dispositivo celular = new Dispositivo("Celular Recepção");
+
+		servico.registraObserver(monitor);
+		servico.registraObserver(celular);
+
+		Emprestimo emprestimoLivro = null;
+		boolean livroEmprestado = false;
+
+		for (int i = 0; i < pessoa.getEmprestimosRealizados().size(); i++) {
+			if (pessoa.getEmprestimosRealizados().get(i).getLivro().getNomeLivro().equalsIgnoreCase(livroNome)) {
+				emprestimoLivro = pessoa.getEmprestimosRealizados().get(i);
+				livroEmprestado = true;
+			}
+		}
+
+		if (livroEmprestado) {
+			Devolucao devolver = new Devolucao(pessoa, emprestimoLivro, diasDePosse);
+			devolver.onAction(emprestimoLivro.getLivro());
+
+			if (devolver.getDiasPosse() > emprestimoLivro.getDiasEmprestimo()) {
+				DevolucaoComAtraso atraso = new DevolucaoComAtraso(emprestimoLivro);
+				System.out.println(emprestimoLivro.getLivro() + "\n");
+				servico.notifyObserver(
+						"O valor da devolução com multa ficou em: R$ " + devolver.executeStrategy(atraso) + " reais.");
+			} else {
+				DevolucaoSemAtraso semAtraso = new DevolucaoSemAtraso(emprestimoLivro);
+
+				System.out.println(emprestimoLivro.getLivro() + "\n");
+				servico.notifyObserver(
+						"A devolução não teve multa, parabéns: R$ " + devolver.executeStrategy(semAtraso) + " reais.");
+			}
+			emprestimoLivro.getLivro().setQuantidade(emprestimoLivro.getLivro().getQuantidade() + 1);
+			pessoa.getEmprestimosRealizados().remove(emprestimoLivro);
+		}
 	}
 
+	@Override
+	public String toString() {
+		return "Devolve Emprestimos";
+	}
 }

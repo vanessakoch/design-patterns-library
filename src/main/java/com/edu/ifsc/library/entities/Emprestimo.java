@@ -1,7 +1,8 @@
 package com.edu.ifsc.library.entities;
 
+import com.edu.ifsc.library.LivroState;
 
-public class Emprestimo {
+public class Emprestimo implements LivroState {
 	private Pessoa cliente;
 	private Bibliotecario funcionario;
 	private Livro livro;
@@ -14,7 +15,11 @@ public class Emprestimo {
 		this.livro = livro;
 		this.diasEmprestimo = diasEmprestimo;
 	}
-	
+
+	public Emprestimo() {
+
+	}
+
 	public Pessoa getCliente() {
 		return cliente;
 	}
@@ -49,10 +54,16 @@ public class Emprestimo {
 
 	@Override
 	public String toString() {
-		return "\nEmprestimo de: " + cliente.getNome() + ", livro: " + livro.getNomeLivro() + ", quantidade de dias: " 
-				 + diasEmprestimo + "\n";
-	}	
-	
-	
-	
+		return "\nEmprestimo de: " + cliente.getNome() + ", livro: " + livro.getNomeLivro() + ", quantidade de dias: "
+				+ diasEmprestimo + "\n";
+	}
+
+	public void onAction(Livro livro) {
+		livro.setState(this);
+	}
+
+	public String imprimirState() {
+		return "Livro emprestado";
+	}
+
 }

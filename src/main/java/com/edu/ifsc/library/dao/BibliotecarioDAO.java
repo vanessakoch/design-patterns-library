@@ -5,10 +5,10 @@ import java.util.List;
 
 import com.edu.ifsc.library.AbstractPessoa;
 import com.edu.ifsc.library.CadastraEmprestimos;
-import com.edu.ifsc.library.Colaborador;
-import com.edu.ifsc.library.Servico;
 import com.edu.ifsc.library.entities.Bibliotecario;
+import com.edu.ifsc.library.entities.Colaborador;
 import com.edu.ifsc.library.entities.PessoaNull;
+import com.edu.ifsc.library.entities.Servico;
 
 public class BibliotecarioDAO {
 	public static List<Bibliotecario> bibliotecariosList = new ArrayList<Bibliotecario>();

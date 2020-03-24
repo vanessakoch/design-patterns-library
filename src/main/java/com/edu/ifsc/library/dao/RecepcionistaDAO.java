@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.edu.ifsc.library.AbstractPessoa;
-import com.edu.ifsc.library.Colaborador;
 import com.edu.ifsc.library.DevolveEmprestimos;
-import com.edu.ifsc.library.Servico;
+import com.edu.ifsc.library.entities.Colaborador;
 import com.edu.ifsc.library.entities.PessoaNull;
 import com.edu.ifsc.library.entities.Recepcionista;
+import com.edu.ifsc.library.entities.Servico;
 
 public class RecepcionistaDAO {
 	public static List<Recepcionista> recepcionistasList = new ArrayList<Recepcionista>();

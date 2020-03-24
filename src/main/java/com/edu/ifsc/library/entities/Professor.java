@@ -1,8 +1,5 @@
 package com.edu.ifsc.library.entities;
 
-import com.edu.ifsc.library.Colaborador;
-import com.edu.ifsc.library.Servico;
-
 public class Professor extends Pessoa implements Colaborador {
 	private Servico funcao;
 
@@ -30,21 +27,22 @@ public class Professor extends Pessoa implements Colaborador {
         funcao.produz();
 	}
 
-	public void executaEmprestimo(String nomePessoa, Bibliotecario nomeFuncionario, String nomeLivro, int diasEmprestimo,
+	public void emprestar(String nomePessoa, Bibliotecario nomeFuncionario, String nomeLivro, int diasEmprestimo,
 			int escolhePessoa) {
 		funcao.realizaEmprestimo(nomePessoa, nomeFuncionario, nomeLivro, diasEmprestimo, escolhePessoa);
 	}
 	
-	public void executaDevolucao(Pessoa pessoa, Emprestimo emprestimo, int diasDePosse) {
-		funcao.devolverEmprestimo(pessoa, emprestimo, diasDePosse);
+	public void devolver(Pessoa pessoa, Recepcionista funcionario, String livro, int diasDePosse) {
+		funcao.devolverEmprestimo(pessoa, funcionario, livro, diasDePosse);
 	}
 	
 	public void recebeServico(Servico funcao) {
 		this.funcao = funcao;
 	}
 
-	public String getFuncao() {
-		return "Professor";
+	public Servico getFuncao() {
+		return funcao;
 	}
+
 
 }
