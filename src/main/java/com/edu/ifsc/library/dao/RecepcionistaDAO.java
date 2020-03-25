@@ -3,8 +3,8 @@ package com.edu.ifsc.library.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.edu.ifsc.library.AbstractPessoa;
-import com.edu.ifsc.library.DevolveEmprestimos;
+import com.edu.ifsc.library.controller.DevolveEmprestimos;
+import com.edu.ifsc.library.entities.AbstractPessoa;
 import com.edu.ifsc.library.entities.Colaborador;
 import com.edu.ifsc.library.entities.PessoaNull;
 import com.edu.ifsc.library.entities.Recepcionista;

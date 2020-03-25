@@ -1,4 +1,4 @@
-package com.edu.ifsc.library;
+package com.edu.ifsc.library.entities;
 
 
 public abstract class AbstractPessoa {

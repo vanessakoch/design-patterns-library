@@ -1,13 +1,17 @@
-package com.edu.ifsc.library;
+package com.edu.ifsc.library.controller;
 
 import com.edu.ifsc.library.dao.AlunoDAO;
 import com.edu.ifsc.library.dao.LivroDAO;
 import com.edu.ifsc.library.dao.ProfessorDAO;
 import com.edu.ifsc.library.entities.Aluno;
-import com.edu.ifsc.library.entities.Ausente;
+import com.edu.ifsc.library.entities.AtividadeBiblioteca;
+import com.edu.ifsc.library.entities.LivroAusente;
 import com.edu.ifsc.library.entities.Bibliotecario;
+import com.edu.ifsc.library.entities.Colaborador;
+import com.edu.ifsc.library.entities.Dispositivo;
 import com.edu.ifsc.library.entities.Emprestimo;
 import com.edu.ifsc.library.entities.Livro;
+import com.edu.ifsc.library.entities.LivroState;
 import com.edu.ifsc.library.entities.Pessoa;
 import com.edu.ifsc.library.entities.Professor;
 import com.edu.ifsc.library.entities.Recepcionista;
@@ -15,7 +19,7 @@ import com.edu.ifsc.library.entities.Servico;
 
 public class CadastraEmprestimos implements Servico {
 
-	public void realizaEmprestimo(String nomePessoa, Bibliotecario funcionario, String nomeLivro, int diasEmprestimo,
+	public void realizaEmprestimo(String nomePessoa, Colaborador funcionario, String nomeLivro, int diasEmprestimo,
 			int escolhePessoa) {
 
 		AtividadeBiblioteca servico = new AtividadeBiblioteca("Dept. Bibliotecário");
@@ -28,8 +32,6 @@ public class CadastraEmprestimos implements Servico {
 		switch (escolhePessoa) {
 
 		case 1:
-			System.out.println(ProfessorDAO.getProfessor(nomePessoa));
-
 			for (Professor professor : ProfessorDAO.professoresList) {
 				for (Livro livro : LivroDAO.livrosBiblioteca) {
 					if (professor.getNome().equalsIgnoreCase(nomePessoa)
@@ -46,7 +48,7 @@ public class CadastraEmprestimos implements Servico {
 									+ "aproximadamente " + diasEmprestimo + " dias.");
 
 						} else {
-							LivroState ausenteState = new Ausente();
+							LivroState ausenteState = new LivroAusente();
 							ausenteState.onAction(livro);
 							System.out.println();
 							servico.notifyObserver("O livro " + livro.getNomeLivro() + " está ausente");
@@ -58,8 +60,6 @@ public class CadastraEmprestimos implements Servico {
 			break;
 
 		case 2:
-			System.out.println(AlunoDAO.getAluno(nomePessoa));
-
 			for (Aluno aluno : AlunoDAO.alunosList) {
 				for (Livro livro : LivroDAO.livrosBiblioteca) {
 					if (aluno.getNome().equalsIgnoreCase(nomePessoa)
@@ -73,16 +73,15 @@ public class CadastraEmprestimos implements Servico {
 								LivroState emprestimoState = new Emprestimo();
 								emprestimoState.onAction(livro);
 								System.out.println(livro + "\n");
-
 								servico.notifyObserver("O livro " + livro.getNomeLivro() + " estará ausente por "
 										+ "aproximadamente " + diasEmprestimo + " dias.");
 
 							} else {
-								System.out.println("\nAluno está com a matricula trancada ou ja se formou");
+								System.out.println("\nAluno está com a matricula trancada ou ja se formou!");
 							}
 
 						} else {
-							LivroState ausenteState = new Ausente();
+							LivroState ausenteState = new LivroAusente();
 							ausenteState.onAction(livro);
 							servico.notifyObserver("O livro " + livro.getNomeLivro() + " está ausente");
 						}
@@ -102,7 +101,7 @@ public class CadastraEmprestimos implements Servico {
 		System.out.println("Trabalhando com empréstimos de livros");
 	}
 
-	public void devolverEmprestimo(Pessoa pessoa, Recepcionista funcionario, String livro, int diasDePosse) {
+	public void devolverEmprestimo(Pessoa pessoa, Colaborador funcionario, String livro, int diasDePosse) {
 		System.out.println("Este funcionario faz cadastro, não devolução!");
 
 	}

@@ -1,11 +1,8 @@
 package com.edu.ifsc.library.entities;
 
-import com.edu.ifsc.library.LivroState;
+public class LivroEstante implements LivroState {
 
-
-public class Estante implements LivroState {
-
-	public Estante() {
+	public LivroEstante() {
 	}
 
 	public void onAction(Livro livro) {

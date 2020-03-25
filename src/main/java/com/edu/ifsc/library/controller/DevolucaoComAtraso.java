@@ -1,4 +1,4 @@
-package com.edu.ifsc.library;
+package com.edu.ifsc.library.controller;
 
 import com.edu.ifsc.library.entities.Emprestimo;
 

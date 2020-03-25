@@ -1,19 +1,17 @@
-package com.edu.ifsc.library;
+package com.edu.ifsc.library.entities;
 
-import com.edu.ifsc.library.entities.Aluno;
-
-public class AlunoMatriculado implements AlunoState {
+public class AlunoTrancado implements AlunoState {
 
 	public void matricular(Aluno aluno) {
-		return;
+		aluno.setEstado(new AlunoMatriculado());
 	}
 
 	public void trancar(Aluno aluno) {
-		aluno.setEstado(new AlunoTrancado());
+		return;
 	}
 
 	public void formar(Aluno aluno) {
-		aluno.setEstado(new AlunoFormado());
+		return;
 	}
 
 	public void retornar(Aluno aluno) {
@@ -21,7 +19,7 @@ public class AlunoMatriculado implements AlunoState {
 	}
 
 	public String getState() {
-		return "matriculado";
+		return "trancado";
 	}
 
 }

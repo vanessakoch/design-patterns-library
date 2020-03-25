@@ -1,14 +1,12 @@
 package com.edu.ifsc.library.entities;
 
-import com.edu.ifsc.library.LivroState;
-
 public class Emprestimo implements LivroState {
 	private Pessoa cliente;
-	private Bibliotecario funcionario;
+	private Colaborador funcionario;
 	private Livro livro;
 	private int diasEmprestimo;
 
-	public Emprestimo(Pessoa cliente, Bibliotecario funcionario, Livro livro, int diasEmprestimo) {
+	public Emprestimo(Pessoa cliente, Colaborador funcionario, Livro livro, int diasEmprestimo) {
 		super();
 		this.cliente = cliente;
 		this.funcionario = funcionario;
@@ -44,11 +42,11 @@ public class Emprestimo implements LivroState {
 		this.diasEmprestimo = diasEmprestimo;
 	}
 
-	public Bibliotecario getFuncionario() {
+	public Colaborador getFuncionario() {
 		return funcionario;
 	}
 
-	public void setFuncionario(Bibliotecario funcionario) {
+	public void setFuncionario(Colaborador funcionario) {
 		this.funcionario = funcionario;
 	}
 

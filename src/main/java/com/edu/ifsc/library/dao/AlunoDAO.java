@@ -2,11 +2,11 @@ package com.edu.ifsc.library.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.edu.ifsc.library.AbstractPessoa;
-import com.edu.ifsc.library.AlunoMatriculado;
-import com.edu.ifsc.library.AlunoState;
-import com.edu.ifsc.library.entities.Aluno;
 
+import com.edu.ifsc.library.entities.AbstractPessoa;
+import com.edu.ifsc.library.entities.Aluno;
+import com.edu.ifsc.library.entities.AlunoMatriculado;
+import com.edu.ifsc.library.entities.AlunoState;
 import com.edu.ifsc.library.entities.PessoaNull;
 
 public class AlunoDAO {

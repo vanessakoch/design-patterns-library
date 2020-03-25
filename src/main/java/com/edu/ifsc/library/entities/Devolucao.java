@@ -1,7 +1,6 @@
 package com.edu.ifsc.library.entities;
 
-import com.edu.ifsc.library.InterfaceCalculoDevolucao;
-import com.edu.ifsc.library.LivroState;
+import com.edu.ifsc.library.controller.InterfaceCalculoDevolucao;
 
 public class Devolucao implements LivroState {
 	private Pessoa cliente;

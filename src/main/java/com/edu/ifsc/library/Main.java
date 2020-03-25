@@ -1,7 +1,12 @@
 package com.edu.ifsc.library;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import com.edu.ifsc.library.controller.CadastraEmprestimos;
+import com.edu.ifsc.library.controller.DevolveEmprestimos;
+import com.edu.ifsc.library.controller.MinistrarAula;
 import com.edu.ifsc.library.dao.AlunoDAO;
 import com.edu.ifsc.library.dao.BibliotecarioDAO;
 import com.edu.ifsc.library.dao.LivroDAO;
@@ -9,11 +14,14 @@ import com.edu.ifsc.library.dao.PessoaDAO;
 import com.edu.ifsc.library.dao.ProfessorDAO;
 import com.edu.ifsc.library.dao.RecepcionistaDAO;
 import com.edu.ifsc.library.entities.Aluno;
-import com.edu.ifsc.library.entities.Ausente;
+import com.edu.ifsc.library.entities.AtividadeBiblioteca;
+import com.edu.ifsc.library.entities.LivroAusente;
 import com.edu.ifsc.library.entities.Bibliotecario;
 import com.edu.ifsc.library.entities.Colaborador;
-import com.edu.ifsc.library.entities.Estante;
+import com.edu.ifsc.library.entities.Dispositivo;
+import com.edu.ifsc.library.entities.LivroEstante;
 import com.edu.ifsc.library.entities.Livro;
+import com.edu.ifsc.library.entities.LivroState;
 import com.edu.ifsc.library.entities.Pessoa;
 import com.edu.ifsc.library.entities.Professor;
 import com.edu.ifsc.library.entities.Recepcionista;
@@ -55,8 +63,8 @@ public class Main {
 			menu();
 			int escolha = t.nextInt();
 
-			LivroState estanteState = new Estante();
-			LivroState ausenteState = new Ausente();
+			LivroState estanteState = new LivroEstante();
+			LivroState ausenteState = new LivroAusente();
 
 			for (Livro livro : LivroDAO.livrosBiblioteca) {
 				if (livro.getQuantidade() == 1) {
@@ -122,13 +130,39 @@ public class Main {
 					System.out.println("\nDigite o número de dias de emprestimo: ");
 					int dias = t.nextInt();
 
-					System.out.println(PessoaDAO.getPessoa(funcionarioNome));
+					System.out.println(LivroDAO.getLivro(livroNome));
+					System.out.println(PessoaDAO.getPessoa(pessoaNome));
+
+					Colaborador colaborador = null;
+					boolean encontrou = false;
 
 					for (Bibliotecario bibliotecario : BibliotecarioDAO.bibliotecariosList) {
-						if (bibliotecario.getNome().equalsIgnoreCase(funcionarioNome)) {
-							bibliotecario.executaFuncao();
-							bibliotecario.emprestar(pessoaNome, bibliotecario, livroNome, dias, pessoaEmpresta);
+						if (bibliotecario.getNome().equalsIgnoreCase(funcionarioNome)
+								&& bibliotecario.getFuncao().toString().equalsIgnoreCase("Cadastra Emprestimos")) {
+							colaborador = bibliotecario;
+							encontrou = true;
 						}
+					}
+					for (Professor p : ProfessorDAO.professoresList) {
+						if (p.getNome().equalsIgnoreCase(funcionarioNome)
+								&& p.getFuncao().toString().equalsIgnoreCase("Cadastra Emprestimos")) {
+							colaborador = p;
+							encontrou = true;
+						}
+					}
+					for (Bibliotecario b : BibliotecarioDAO.bibliotecariosList) {
+						if (b.getNome().equalsIgnoreCase(funcionarioNome)
+								&& b.getFuncao().toString().equalsIgnoreCase("Cadastra Emprestimos")) {
+							colaborador = b;
+							encontrou = true;
+						}
+					}
+
+					if (encontrou) {
+						colaborador.executaFuncao();
+						colaborador.emprestar(pessoaNome, colaborador, livroNome, dias, pessoaEmpresta);
+					}else {
+						System.out.println(PessoaDAO.getPessoa(funcionarioNome));
 					}
 
 				} else {
@@ -150,32 +184,54 @@ public class Main {
 
 				System.out.println("\nDigite quantos dias a pessoa ficou com o livro: ");
 				int diasDevolucao = t.nextInt();
-				Recepcionista devolveFuncionaria = null;
+				Colaborador devolveFuncionaria = null;
 				Pessoa devolvePessoa = null;
 				boolean encontrou = false;
+				boolean encontrafuncao = false;
 
-				System.out.println(PessoaDAO.getPessoa(funcionarioDevolve));
 				System.out.println(PessoaDAO.getPessoa(pessoaDevolve));
+				System.out.println(LivroDAO.getLivro(livroDevolve));
 
-				for (Recepcionista recepcionista : RecepcionistaDAO.recepcionistasList) {
-					for (Professor professor : ProfessorDAO.professoresList) {
-						for (Aluno aluno : AlunoDAO.alunosList) {
-							if (recepcionista.getNome().equalsIgnoreCase(funcionarioDevolve)) {
-								devolveFuncionaria = recepcionista;
-								if (professor.getNome().equalsIgnoreCase(pessoaDevolve)) {
-									devolvePessoa = professor;
-									encontrou = true;
-								} else if (aluno.getNome().equalsIgnoreCase(pessoaDevolve)) {
-									devolvePessoa = aluno;
-									encontrou = true;
-								}
-							}
+				for (Recepcionista rec : RecepcionistaDAO.recepcionistasList) {
+					if (rec.getNome().equalsIgnoreCase(funcionarioDevolve)
+							&& rec.getFuncao().toString().equalsIgnoreCase("Devolve Emprestimos")) {
+						devolveFuncionaria = rec;
+						encontrafuncao = true;
+					}
+				}
+				for (Bibliotecario bibliotec : BibliotecarioDAO.bibliotecariosList) {
+					if (bibliotec.getNome().equalsIgnoreCase(funcionarioDevolve)
+							&& bibliotec.getFuncao().toString().equalsIgnoreCase("Devolve Emprestimos")) {
+						devolveFuncionaria = bibliotec;
+						encontrafuncao = true;
+					}
+				}
+
+				for (Professor professor : ProfessorDAO.professoresList) {
+					if (professor.getNome().equalsIgnoreCase(funcionarioDevolve)
+							&& professor.getFuncao().toString().equalsIgnoreCase("Devolve Emprestimos")) {
+						encontrafuncao = true;
+						devolveFuncionaria = professor;
+					}
+				}
+
+				for (Professor professor : ProfessorDAO.professoresList) {
+					for (Aluno aluno : AlunoDAO.alunosList) {
+						if (professor.getNome().equalsIgnoreCase(pessoaDevolve)) {
+							devolvePessoa = professor;
+							encontrou = true;
+						} else if (aluno.getNome().equalsIgnoreCase(pessoaDevolve)) {
+							devolvePessoa = aluno;
+							encontrou = true;
 						}
 					}
 				}
-				if (encontrou) {
+
+				if (encontrou && encontrafuncao) {
 					devolveFuncionaria.executaFuncao();
 					devolveFuncionaria.devolver(devolvePessoa, devolveFuncionaria, livroDevolve, diasDevolucao);
+				} else {
+					System.out.println(PessoaDAO.getPessoa(funcionarioDevolve));
 				}
 				break;
 
@@ -218,110 +274,48 @@ public class Main {
 
 				System.out.println(PessoaDAO.getPessoa(namePessoa));
 
-				switch (choice) {
-
-				case 1:
-					for (Aluno aluno : AlunoDAO.alunosList) {
-						for (Bibliotecario bibliotecario : BibliotecarioDAO.bibliotecariosList) {
-							for (Professor professor : ProfessorDAO.professoresList) {
-								for (Recepcionista recepcionista : RecepcionistaDAO.recepcionistasList) {
-									if (aluno.getNome().equalsIgnoreCase(namePessoa)) {
-										isAluno = true;
-										pessoaPresente = aluno;
-									} else if (bibliotecario.getNome().equalsIgnoreCase(namePessoa)) {
-										isBibliotecario = true;
-										pessoaPresente = bibliotecario;
-									} else if (professor.getNome().equalsIgnoreCase(namePessoa)) {
-										isProfessor = true;
-										pessoaPresente = professor;
-									} else if (recepcionista.getNome().equalsIgnoreCase(namePessoa)) {
-										isRecepcionista = true;
-										pessoaPresente = recepcionista;
-									}
+				for (Aluno aluno : AlunoDAO.alunosList) {
+					for (Bibliotecario bibliotecario : BibliotecarioDAO.bibliotecariosList) {
+						for (Professor professor : ProfessorDAO.professoresList) {
+							for (Recepcionista recepcionista : RecepcionistaDAO.recepcionistasList) {
+								if (aluno.getNome().equalsIgnoreCase(namePessoa)) {
+									isAluno = true;
+									pessoaPresente = aluno;
+								} else if (bibliotecario.getNome().equalsIgnoreCase(namePessoa)) {
+									isBibliotecario = true;
+									pessoaPresente = bibliotecario;
+								} else if (professor.getNome().equalsIgnoreCase(namePessoa)) {
+									isProfessor = true;
+									pessoaPresente = professor;
+								} else if (recepcionista.getNome().equalsIgnoreCase(namePessoa)) {
+									isRecepcionista = true;
+									pessoaPresente = recepcionista;
 								}
 							}
 						}
 					}
-					if (isAluno) {
+				}
+
+				switch (choice) {
+
+				case 1:
+
+					if (isAluno || isBibliotecario || isProfessor || isRecepcionista) {
 						pessoaPresente.setQuantidadeFolha(paginas);
-						System.out.println("\nEsta pessoa é nosso aluno(a), favor cobrar: R$ "
+						System.out.println("\nEsta pessoa é nosso(a) " + pessoaPresente + ", favor cobrar: R$ "
 								+ pessoaPresente.valorXeroxTotal() + "\n");
 						papelaria.notifyObserver("Aguarde, copiando as páginas...");
-
-					}
-					if (isBibliotecario) {
-						pessoaPresente.setQuantidadeFolha(paginas);
-						System.out.println("\nEsta pessoa é nosso bibliotecario(a), favor cobrar: R$ "
-								+ pessoaPresente.valorXeroxTotal() + "\n");
-						papelaria.notifyObserver("Aguarde, copiando as páginas...");
-
-					}
-					if (isProfessor) {
-						pessoaPresente.setQuantidadeFolha(paginas);
-						System.out.println("\nEsta pessoa é nosso professor(a), favor cobrar: R$ "
-								+ pessoaPresente.valorXeroxTotal() + "\n");
-						papelaria.notifyObserver("Aguarde, copiando as páginas...");
-
-					}
-					if (isRecepcionista) {
-						pessoaPresente.setQuantidadeFolha(paginas);
-						System.out.println("\nEsta pessoa é nosso(a) recepcionista, favor cobrar: R$ "
-								+ pessoaPresente.valorXeroxTotal() + "\n");
-						papelaria.notifyObserver("Aguarde, copiando as páginas...");
-
 					}
 
 					break;
 
 				case 2:
-					for (Aluno aluno : AlunoDAO.alunosList) {
-						for (Bibliotecario bibliotecario : BibliotecarioDAO.bibliotecariosList) {
-							for (Professor professor : ProfessorDAO.professoresList) {
-								for (Recepcionista recepcionista : RecepcionistaDAO.recepcionistasList) {
-									if (aluno.getNome().equalsIgnoreCase(namePessoa)) {
-										isAluno = true;
-										pessoaPresente = aluno;
-									} else if (bibliotecario.getNome().equalsIgnoreCase(namePessoa)) {
-										isBibliotecario = true;
-										pessoaPresente = bibliotecario;
-									} else if (professor.getNome().equalsIgnoreCase(namePessoa)) {
-										isProfessor = true;
-										pessoaPresente = professor;
-									} else if (recepcionista.getNome().equalsIgnoreCase(namePessoa)) {
-										isRecepcionista = true;
-										pessoaPresente = recepcionista;
-									}
-								}
-							}
-						}
-					}
-					if (isAluno) {
+
+					if (isAluno || isBibliotecario || isProfessor || isRecepcionista) {
 						pessoaPresente.setQuantidadeFolha(paginas);
-						System.out.println("\nEsta pessoa é nosso aluno(a), favor cobrar: R$ "
+						System.out.println("\nEsta pessoa é nosso(a) " + pessoaPresente + ", favor cobrar: R$ "
 								+ pessoaPresente.valorImpressaoTotal() + "\n");
 						papelaria.notifyObserver("Aguarde, imprimindo as páginas...");
-
-					}
-					if (isBibliotecario) {
-						pessoaPresente.setQuantidadeFolha(paginas);
-						System.out.println("\nEsta pessoa é nosso bibliotecario(a), favor cobrar: R$ "
-								+ pessoaPresente.valorImpressaoTotal() + "\n");
-						papelaria.notifyObserver("Aguarde, imprimindo as páginas...");
-
-					}
-					if (isProfessor) {
-						pessoaPresente.setQuantidadeFolha(paginas);
-						System.out.println("\nEsta pessoa é nosso professor(a), favor cobrar: R$ "
-								+ pessoaPresente.valorImpressaoTotal() + "\n");
-						papelaria.notifyObserver("Aguarde, imprimindo as páginas...");
-
-					}
-					if (isRecepcionista) {
-						pessoaPresente.setQuantidadeFolha(paginas);
-						System.out.println("\nEsta pessoa é nosso(a) recepcionista, favor cobrar: R$ "
-								+ pessoaPresente.valorImpressaoTotal() + "\n");
-						papelaria.notifyObserver("Aguarde, imprimindo as páginas...");
-
 					}
 
 				default:
@@ -404,6 +398,7 @@ public class Main {
 			default:
 				break;
 			}
+
 		}
 
 	}

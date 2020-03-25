@@ -4,8 +4,6 @@ package com.edu.ifsc.library.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.edu.ifsc.library.AbstractPessoa;
-
 public abstract class Pessoa extends AbstractPessoa {
 	protected String nome;
 	private int codigo;

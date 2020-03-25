@@ -1,6 +1,4 @@
-package com.edu.ifsc.library;
-
-import com.edu.ifsc.library.entities.Livro;
+package com.edu.ifsc.library.entities;
 
 public interface LivroState {
 	

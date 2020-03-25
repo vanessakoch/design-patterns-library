@@ -1,6 +1,4 @@
-package com.edu.ifsc.library;
-
-import com.edu.ifsc.library.entities.Aluno;
+package com.edu.ifsc.library.entities;
 
 public interface AlunoState {
 

@@ -1,8 +1,5 @@
 package com.edu.ifsc.library.entities;
 
-
-import com.edu.ifsc.library.AbstractPessoa;
-
 public class PessoaNull extends AbstractPessoa {
 
 	@Override

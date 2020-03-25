@@ -1,10 +1,8 @@
 package com.edu.ifsc.library.entities;
 
-import com.edu.ifsc.library.LivroState;
+public class LivroAusente implements LivroState {
 
-public class Ausente implements LivroState {
-
-	public Ausente() {
+	public LivroAusente() {
 
 	}
 

@@ -1,7 +1,5 @@
 package com.edu.ifsc.library.entities;
 
-import com.edu.ifsc.library.AlunoState;
-
 public class Aluno extends Pessoa {
 
 	private String curso;

@@ -3,8 +3,8 @@ package com.edu.ifsc.library.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.edu.ifsc.library.AbstractPessoa;
-import com.edu.ifsc.library.MinistrarAula;
+import com.edu.ifsc.library.controller.MinistrarAula;
+import com.edu.ifsc.library.entities.AbstractPessoa;
 import com.edu.ifsc.library.entities.PessoaNull;
 import com.edu.ifsc.library.entities.Professor;
 import com.edu.ifsc.library.entities.Servico;

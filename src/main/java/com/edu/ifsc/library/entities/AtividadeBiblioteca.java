@@ -1,7 +1,10 @@
-package com.edu.ifsc.library;
+package com.edu.ifsc.library.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.edu.ifsc.library.controller.Observable;
+import com.edu.ifsc.library.controller.Observer;
 
 public class AtividadeBiblioteca implements Observable {
 	private String nome;

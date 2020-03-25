@@ -1,7 +1,5 @@
 package com.edu.ifsc.library.entities;
 
-import com.edu.ifsc.library.AbstractLivro;
-
 public class LivroNull extends AbstractLivro {
 
 	@Override

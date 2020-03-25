@@ -1,4 +1,7 @@
-package com.edu.ifsc.library;
+package com.edu.ifsc.library.entities;
+
+import com.edu.ifsc.library.controller.Observable;
+import com.edu.ifsc.library.controller.Observer;
 
 public class Dispositivo implements Observer {
 	private String name;

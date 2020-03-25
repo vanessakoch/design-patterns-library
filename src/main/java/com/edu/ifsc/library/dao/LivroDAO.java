@@ -3,7 +3,7 @@ package com.edu.ifsc.library.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.edu.ifsc.library.AbstractLivro;
+import com.edu.ifsc.library.entities.AbstractLivro;
 import com.edu.ifsc.library.entities.Livro;
 import com.edu.ifsc.library.entities.LivroNull;
 

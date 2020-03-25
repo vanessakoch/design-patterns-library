@@ -27,12 +27,12 @@ public class Professor extends Pessoa implements Colaborador {
         funcao.produz();
 	}
 
-	public void emprestar(String nomePessoa, Bibliotecario nomeFuncionario, String nomeLivro, int diasEmprestimo,
+	public void emprestar(String nomePessoa, Colaborador nomeFuncionario, String nomeLivro, int diasEmprestimo,
 			int escolhePessoa) {
 		funcao.realizaEmprestimo(nomePessoa, nomeFuncionario, nomeLivro, diasEmprestimo, escolhePessoa);
 	}
 	
-	public void devolver(Pessoa pessoa, Recepcionista funcionario, String livro, int diasDePosse) {
+	public void devolver(Pessoa pessoa, Colaborador funcionario, String livro, int diasDePosse) {
 		funcao.devolverEmprestimo(pessoa, funcionario, livro, diasDePosse);
 	}
 	
@@ -42,6 +42,10 @@ public class Professor extends Pessoa implements Colaborador {
 
 	public Servico getFuncao() {
 		return funcao;
+	}
+
+	public String getNomeColaborador() {
+		return nome;
 	}
 
 

@@ -1,8 +1,5 @@
 package com.edu.ifsc.library.entities;
 
-import com.edu.ifsc.library.AbstractLivro;
-import com.edu.ifsc.library.LivroState;
-
 public class Livro extends AbstractLivro {
 	private String nomeLivro;
 	private String autor;
@@ -10,7 +7,7 @@ public class Livro extends AbstractLivro {
 	private int ano;
 	private int quantidade;
 	private LivroState livroState;
-	private Estante startState = new Estante();
+	private LivroEstante startState = new LivroEstante();
     
 	public Livro(String nomeLivro, int edicao, String autor, int ano) {
 		super();
