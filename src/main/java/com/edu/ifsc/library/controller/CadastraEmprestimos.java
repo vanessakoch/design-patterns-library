@@ -5,16 +5,14 @@ import com.edu.ifsc.library.dao.LivroDAO;
 import com.edu.ifsc.library.dao.ProfessorDAO;
 import com.edu.ifsc.library.entities.Aluno;
 import com.edu.ifsc.library.entities.AtividadeBiblioteca;
-import com.edu.ifsc.library.entities.LivroAusente;
-import com.edu.ifsc.library.entities.Bibliotecario;
 import com.edu.ifsc.library.entities.Colaborador;
 import com.edu.ifsc.library.entities.Dispositivo;
 import com.edu.ifsc.library.entities.Emprestimo;
 import com.edu.ifsc.library.entities.Livro;
+import com.edu.ifsc.library.entities.LivroAusente;
 import com.edu.ifsc.library.entities.LivroState;
 import com.edu.ifsc.library.entities.Pessoa;
 import com.edu.ifsc.library.entities.Professor;
-import com.edu.ifsc.library.entities.Recepcionista;
 import com.edu.ifsc.library.entities.Servico;
 
 public class CadastraEmprestimos implements Servico {

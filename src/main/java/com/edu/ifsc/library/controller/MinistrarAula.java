@@ -1,9 +1,7 @@
 package com.edu.ifsc.library.controller;
 
-import com.edu.ifsc.library.entities.Bibliotecario;
 import com.edu.ifsc.library.entities.Colaborador;
 import com.edu.ifsc.library.entities.Pessoa;
-import com.edu.ifsc.library.entities.Recepcionista;
 import com.edu.ifsc.library.entities.Servico;
 
 public class MinistrarAula implements Servico {

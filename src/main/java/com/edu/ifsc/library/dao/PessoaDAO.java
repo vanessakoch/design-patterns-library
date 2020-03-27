@@ -1,8 +1,5 @@
 package com.edu.ifsc.library.dao;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.edu.ifsc.library.controller.CadastraEmprestimos;
 import com.edu.ifsc.library.controller.DevolveEmprestimos;
 import com.edu.ifsc.library.controller.MinistrarAula;

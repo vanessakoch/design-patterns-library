@@ -1,7 +1,6 @@
 package com.edu.ifsc.library;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Scanner;
 
 import com.edu.ifsc.library.controller.CadastraEmprestimos;

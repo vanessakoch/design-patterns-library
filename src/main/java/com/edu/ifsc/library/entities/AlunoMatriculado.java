@@ -15,7 +15,7 @@ public class AlunoMatriculado implements AlunoState {
 	}
 
 	public void retornar(Aluno aluno) {
-		aluno.setEstado(new AlunoMatriculado());
+		return;
 	}
 
 	public String getState() {
